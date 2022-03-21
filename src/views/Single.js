@@ -1,8 +1,10 @@
 import {mediaUrl} from '../utils/variables';
+import {useLocation} from 'react-router-dom';
 
 const Single = () => {
-  // eslint-disable-next-line max-len
-  const file = {}; // TODO in the next task: single media from props.location.state
+  const location = useLocation();
+  console.log(location);
+  const file = location.state.file;
 
   return (
     <>
@@ -11,7 +13,5 @@ const Single = () => {
     </>
   );
 };
-
-// TODO in the next task: add propType for location
 
 export default Single;
