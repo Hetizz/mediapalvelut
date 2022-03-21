@@ -7,6 +7,7 @@ import {
 import Home from './views/Home';
 import Profile from './views/Profile';
 import Single from './views/Single';
+import Login from './views/Login';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Login />}/>
+        <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />}/>
         <Route path='/single' element={<Single />} />
       </Routes>
