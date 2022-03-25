@@ -1,4 +1,5 @@
 import {useForm} from '../hooks/FormHooks';
+import {useUser} from '../hooks/ApiHooks';
 
 const RegisterForm = (props) => {
   const alkuarvot = {
@@ -7,13 +8,24 @@ const RegisterForm = (props) => {
     email: '',
     full_name: '',
   };
+
+  const {postUser} = useUser();
+
   const doRegister = () => {
     console.log('doRegister');
+    try {
+      const userData = postUser(inputs);
+      console.log(userData);
+    } catch (err) {
+      alert(err.message);
+    }
+    postUser(inputs);
   };
-  const {inputs, handleInputChange} = useForm(doRegister, alkuarvot);
+  // eslint-disable-next-line max-len
+  const {inputs, handleInputChange, handleSubmit} = useForm(doRegister, alkuarvot);
   console.log(inputs);
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input
         placeholder="username"
         name="username"
