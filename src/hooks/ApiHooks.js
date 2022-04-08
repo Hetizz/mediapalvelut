@@ -16,17 +16,14 @@ const fetchJson = async (url, options = {}) => {
   }
 };
 
-// const apiUrl = 'http://media.mw.metropolia.fi/wbma/';
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
   const getMedia = async () => {
     try {
-      const mediaResponse = await fetch(baseUrl + 'media');
-      const media = await mediaResponse.json();
+      const media = await fetchJson(baseUrl + 'media');
       const allFiles = await Promise.all(
           media.map(async (file) => {
-            const fileResponse = await fetch(`${baseUrl}media/${file.file_id}`);
-            return await fileResponse.json();
+            return await fetchJson(`${baseUrl}media/${file.file_id}`);
           }),
       );
       setMediaArray(allFiles);
@@ -38,13 +35,13 @@ const useMedia = () => {
   useEffect(() => {
     getMedia();
   }, []);
+
   return {mediaArray};
 };
 
 const useUser = () => {
   const getUser = async (token) => {
     const fetchOptions = {
-      method: 'GET',
       headers: {
         'x-access-token': token,
       },
@@ -54,11 +51,7 @@ const useUser = () => {
 
   const getUsername = async (username) => {
     const checkUser = await fetchJson(baseUrl + 'users/username/' + username);
-    if (checkUser.available) {
-      return true;
-    } else {
-      throw new Error('Username not available');
-    }
+    return checkUser.available;
   };
 
   const postUser = async (inputs) => {
@@ -71,6 +64,7 @@ const useUser = () => {
     };
     return await fetchJson(baseUrl + 'users', fetchOptions);
   };
+
   return {getUser, postUser, getUsername};
 };
 
@@ -100,4 +94,4 @@ const useTag = () => {
   return {getTag};
 };
 
-export {useMedia, useUser, useLogin, useTag};
+export {useMedia, useLogin, useUser, useTag};
