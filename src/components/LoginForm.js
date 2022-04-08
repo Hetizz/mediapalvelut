@@ -3,6 +3,7 @@ import {useForm} from '../hooks/FormHooks';
 import {useLogin} from '../hooks/ApiHooks';
 import {useContext} from 'react';
 import {MediaContext} from '../contexts/MediaContext';
+import {Button, Grid, TextField, Typography} from '@mui/material';
 
 
 const LoginForm = (props) => {
@@ -31,22 +32,38 @@ const LoginForm = (props) => {
   const {inputs, handleInputChange, handleSubmit} = useForm(doLogin, alkuarvot);
   console.log(inputs);
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="username"
-        name="username"
-        onChange={handleInputChange}
-        value={inputs.username}
-      />
-      <input
-        placeholder="password"
-        name="password"
-        type="password"
-        onChange={handleInputChange}
-        value={inputs.password}
-      />
-      <input type="submit" value="login" />
-    </form>
+    <Grid container>
+      <Grid item xs={12}>
+        <Typography component="h1" variant="h2" gutterBottom>
+          Login
+        </Typography>
+      </Grid>
+
+      <Grid item xs={12}>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            label="username"
+            placeholder="username"
+            name="username"
+            onChange={handleInputChange}
+            value={inputs.username}
+          />
+          <TextField
+            fullWidth
+            label="password"
+            placeholder="password"
+            name="password"
+            type="password"
+            onChange={handleInputChange}
+            value={inputs.password}
+          />
+          <Button fullWidth color="primary" type="submit" variant="contained">
+            Login
+          </Button>
+        </form>
+      </Grid>
+    </Grid>
   );
 };
 
