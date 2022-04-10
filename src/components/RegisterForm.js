@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {useForm} from '../hooks/FormHooks';
+import useForm from '../hooks/FormHooks';
 import {useUser} from '../hooks/ApiHooks';
 import {Grid} from '@mui/material';
 import {Typography} from '@mui/material';

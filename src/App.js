@@ -1,5 +1,4 @@
 import './App.css';
-// import MediaTable from './components/MediaTable';
 import Nav from './components/Nav';
 import {
   BrowserRouter as Router, Route, Routes,
@@ -12,6 +11,7 @@ import Logout from './views/Logout';
 import {MediaProvider} from './contexts/MediaContext';
 import {themeOptions} from './theme/themeOptions';
 import {Container, createTheme, ThemeProvider} from '@mui/material';
+import Upload from './views/Upload';
 
 const theme = createTheme(themeOptions);
 
@@ -29,6 +29,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/single" element={<Single />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/upload" element={<Upload />} />
             </Routes>
           </Container>
         </ThemeProvider>

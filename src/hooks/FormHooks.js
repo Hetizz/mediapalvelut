@@ -8,13 +8,20 @@ const useForm = (callback, initState) => {
     }
     callback();
   };
+
   const handleInputChange = (event) => {
-    event.persist();
-    setInputs((inputs) => ({
-      ...inputs,
-      [event.target.name]: event.target.value,
-    }));
+    event.persist && event.persist();
+
+    setInputs((inputs) => {
+      return {
+        ...inputs,
+        [event.target.name]: event.target.files ?
+          event.target.files[0] :
+          event.target.value,
+      };
+    });
   };
+
   return {
     handleSubmit,
     handleInputChange,
@@ -22,4 +29,4 @@ const useForm = (callback, initState) => {
   };
 };
 
-export {useForm};
+export default useForm;

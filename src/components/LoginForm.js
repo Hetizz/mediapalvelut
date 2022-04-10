@@ -1,5 +1,5 @@
 import {useNavigate} from 'react-router-dom';
-import {useForm} from '../hooks/FormHooks';
+import useForm from '../hooks/FormHooks';
 import {useLogin} from '../hooks/ApiHooks';
 import {useContext} from 'react';
 import {MediaContext} from '../contexts/MediaContext';

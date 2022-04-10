@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import {Home, AccountCircle} from '@mui/icons-material';
+import {Home, AccountCircle, CloudUpload} from '@mui/icons-material';
 
 const Nav = () => {
   const [user, setUser] = useContext(MediaContext);
@@ -90,6 +90,12 @@ const Nav = () => {
                   <AccountCircle />
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
+              </ListItemButton>
+              <ListItemButton component={Link} to="/upload">
+                <ListItemIcon>
+                  <CloudUpload />
+                </ListItemIcon>
+                <ListItemText primary="Upload" />
               </ListItemButton>
             </>
           )}
