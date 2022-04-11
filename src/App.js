@@ -12,6 +12,7 @@ import {MediaProvider} from './contexts/MediaContext';
 import {themeOptions} from './theme/themeOptions';
 import {Container, createTheme, ThemeProvider} from '@mui/material';
 import Upload from './views/Upload';
+import MyFiles from './views/MyFiles';
 
 const theme = createTheme(themeOptions);
 
@@ -30,6 +31,7 @@ function App() {
               <Route path="/single" element={<Single />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/upload" element={<Upload />} />
+              <Route path="/myfiles" element={<MyFiles />} />
             </Routes>
           </Container>
         </ThemeProvider>

@@ -1,14 +1,16 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import {useEffect, useState} from 'react';
 import MediaRow from './MediaRow';
 // import {baseUrl} from '../utils/variables';
 import {useMedia} from '../hooks/ApiHooks';
 import {useWindowSize} from '../hooks/WindowHooks';
 import {ImageList, CircularProgress} from '@mui/material';
+import {useContext} from 'react';
+import {MediaContext} from '../contexts/MediaContext';
 
-
-const MediaTable = () => {
-  const {mediaArray, loading} = useMedia();
+const MediaTable = ({allFiles = true}) => {
+  const [user] = useContext(MediaContext);
+  const {mediaArray, loading} = useMedia(allFiles, user?.user_id);
   const windowSize = useWindowSize();
   console.log(mediaArray);
   return (
@@ -28,6 +30,8 @@ const MediaTable = () => {
   );
 };
 
-MediaTable.propTypes = {};
+MediaTable.propTypes = {
+  allFiles: PropTypes.bool,
+};
 
 export default MediaTable;
