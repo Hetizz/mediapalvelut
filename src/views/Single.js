@@ -11,6 +11,7 @@ import {
   Avatar,
 } from '@mui/material';
 import {safeParseJson} from '../utils/functions';
+import BackButton from '../components/BackButton';
 
 const Single = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const Single = () => {
 
   return (
     <>
+      <BackButton />
       <Typography component="h1" variant="h2">
         {file.title}
       </Typography>
@@ -37,7 +39,7 @@ const Single = () => {
           image={mediaUrl + file.filename}
           alt={file.title}
           sx={{
-            height: '60vh',
+            height: '80vh',
             filter: `
           brightness(${filters.brightness}%)
           contrast(${filters.contrast}%)
