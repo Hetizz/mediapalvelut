@@ -19,7 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {Home, AccountCircle, CloudUpload, Folder} from '@mui/icons-material';
 
 const Nav = () => {
-  const [user, setUser] = useContext(MediaContext);
+  const {user, setUser} = useContext(MediaContext);
   const [open, setOpen] = useState(false);
   const {getUser} = useUser();
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ const Nav = () => {
       const userData = await getUser(localStorage.getItem('token'));
       console.log(userData);
       setUser(userData);
-      navigate('/home');
     } catch (err) {
       setUser(null);
       navigate('/');

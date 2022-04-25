@@ -1,5 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {baseUrl, appID} from '../utils/variables';
+import {MediaContext} from '../contexts/MediaContext';
 
 const fetchJson = async (url, options = {}) => {
   try {
@@ -17,6 +18,7 @@ const fetchJson = async (url, options = {}) => {
 };
 
 const useMedia = (showAllFiles, userId) => {
+  const {update} = useContext(MediaContext);
   const [mediaArray, setMediaArray] = useState([]);
   const [loading, setLoading] = useState(false);
   const getMedia = async () => {
@@ -43,6 +45,10 @@ const useMedia = (showAllFiles, userId) => {
     }
   };
 
+  useEffect(() => {
+    getMedia();
+  }, [userId, update]);
+
   const postMedia = async (formdata, token) => {
     try {
       setLoading(true);
@@ -59,11 +65,33 @@ const useMedia = (showAllFiles, userId) => {
     }
   };
 
-  useEffect(() => {
-    getMedia();
-  }, [userId]);
+  const deleteMedia = async (fileId, token) => {
+    const fetchOptions = {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': token,
+      },
+    };
+    return await fetchJson(baseUrl + 'media/', fileId, fetchOptions);
+  };
+  const putMedia = async (fileId, data, token) => {
+    try {
+      setLoading(true);
+      const fetchOptions = {
+        method: 'PUT',
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      return await fetchJson(baseUrl + 'media/' + fileId, fetchOptions);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return {mediaArray, postMedia, loading};
+  return {mediaArray, postMedia, loading, deleteMedia, putMedia};
 };
 
 const useUser = () => {

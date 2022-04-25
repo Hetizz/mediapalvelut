@@ -13,6 +13,7 @@ import {themeOptions} from './theme/themeOptions';
 import {Container, createTheme, ThemeProvider} from '@mui/material';
 import Upload from './views/Upload';
 import MyFiles from './views/MyFiles';
+import Modify from './views/Modify';
 
 const theme = createTheme(themeOptions);
 
@@ -32,6 +33,7 @@ function App() {
               <Route path="/logout" element={<Logout />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/myfiles" element={<MyFiles />} />
+              <Route path="/modify" element={<Modify />} />
             </Routes>
           </Container>
         </ThemeProvider>

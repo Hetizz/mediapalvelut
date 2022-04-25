@@ -1,5 +1,5 @@
-import {mediaUrl} from '../utils/variables';
 import {useLocation} from 'react-router-dom';
+import {mediaUrl} from '../utils/variables';
 import {
   Card,
   CardContent,
@@ -12,13 +12,11 @@ import {
 } from '@mui/material';
 import {safeParseJson} from '../utils/functions';
 import BackButton from '../components/BackButton';
-import {useTag} from '../hooks/ApiHooks';
 import {useEffect, useState} from 'react';
+import {useTag} from '../hooks/ApiHooks';
 
 const Single = () => {
-  const [avatar, setAvatar] = useState({
-    filename: 'https://placekitten.com/200/300',
-  });
+  const [avatar, setAvatar] = useState({});
   const location = useLocation();
   console.log(location);
   const file = location.state.file;
@@ -41,6 +39,7 @@ const Single = () => {
         const ava = avatars.pop();
         ava.filename = mediaUrl + ava.filename;
         setAvatar(ava);
+        // hae kuvan pomistajan tiedot
       }
     } catch (err) {
       // console.log(err);
@@ -50,6 +49,8 @@ const Single = () => {
   useEffect(() => {
     fetchAvatar();
   }, []);
+
+  console.log(avatar);
 
   return (
     <>
@@ -61,10 +62,11 @@ const Single = () => {
         <CardMedia
           component={file.media_type === 'image' ? 'img' : file.media_type}
           controls={true}
+          poster={mediaUrl + file.screenshot}
           src={mediaUrl + file.filename}
           alt={file.title}
           sx={{
-            height: '80vh',
+            height: '60vh',
             filter: `
           brightness(${filters.brightness}%)
           contrast(${filters.contrast}%)

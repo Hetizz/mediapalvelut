@@ -1,14 +1,13 @@
-import {useNavigate} from 'react-router-dom';
-import useForm from '../hooks/FormHooks';
-import {useLogin} from '../hooks/ApiHooks';
-import {useContext} from 'react';
-import {MediaContext} from '../contexts/MediaContext';
 import {Button, Grid, TextField, Typography} from '@mui/material';
+import {useContext} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {MediaContext} from '../contexts/MediaContext';
+import {useLogin} from '../hooks/ApiHooks';
+import useForm from '../hooks/FormHooks';
 
-
-const LoginForm = (props) => {
+const LoginForm = () => {
   // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useContext(MediaContext);
+  const {user, setUser} = useContext(MediaContext);
   const alkuarvot = {
     username: '',
     password: '',
@@ -21,7 +20,6 @@ const LoginForm = (props) => {
     console.log('doLogin');
     try {
       const userData = await postLogin(inputs);
-      console.log('USER DATA', userData.user);
       localStorage.setItem('token', userData.token);
       setUser(userData.user);
       navigate('/home');
@@ -29,6 +27,7 @@ const LoginForm = (props) => {
       alert(err.message);
     }
   };
+
   const {inputs, handleInputChange, handleSubmit} = useForm(doLogin, alkuarvot);
   console.log(inputs);
   return (

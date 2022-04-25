@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import {useTag, useUser} from '../hooks/ApiHooks';
-// eslint-disable-next-line no-unused-vars
+import {useTag} from '../hooks/ApiHooks';
 import {useContext, useEffect, useState} from 'react';
 import {MediaContext} from '../contexts/MediaContext';
 import {mediaUrl} from '../utils/variables';
@@ -20,7 +18,7 @@ import BackButton from '../components/BackButton';
 import {Link} from 'react-router-dom';
 
 const Profile = () => {
-  const [user] = useContext(MediaContext);
+  const {user} = useContext(MediaContext);
   const [avatar, setAvatar] = useState({
     filename: 'https://placekitten.com/200/300',
   });

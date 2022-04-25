@@ -9,8 +9,8 @@ import {useContext} from 'react';
 import {MediaContext} from '../contexts/MediaContext';
 
 const MediaTable = ({allFiles = true}) => {
-  const [user] = useContext(MediaContext);
-  const {mediaArray, loading} = useMedia(allFiles, user?.user_id);
+  const {user} = useContext(MediaContext);
+  const {mediaArray, loading, deleteMedia} = useMedia(allFiles, user?.user_id);
   const windowSize = useWindowSize();
   console.log(mediaArray);
   return (
@@ -22,7 +22,11 @@ const MediaTable = ({allFiles = true}) => {
         variant="masonry"
         cols={windowSize.width > 768 ? 3 : 2} gap={8}>
         {mediaArray.map((item, index) => {
-          return <MediaRow key={index} file={item} />;
+          return <MediaRow
+            key={index}
+            file={item}
+            userId={user.user_id}
+            deleteMedia={deleteMedia} />;
         })}
       </ImageList>
       )}
